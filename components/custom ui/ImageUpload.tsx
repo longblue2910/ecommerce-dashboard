@@ -33,26 +33,27 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   return (
     <div>
       <div className="mb-4 flex flex-wrap items-center gap-4">
-        {localValue.map((url) => (
-          <div key={url} className="relative w-[200px] h-[200px]">
-            <div className="absolute top-0 right-0 z-10">
-              <Button
-                onClick={() => onRemove(url)}
-                size="sm"
-                className="bg-red-1 text-white"
-              >
-                <Trash className="w-4 h-4" />
-              </Button>
+        {localValue &&
+          localValue.map((url) => (
+            <div key={url} className="relative w-[200px] h-[200px]">
+              <div className="absolute top-0 right-0 z-10">
+                <Button
+                  onClick={() => onRemove(url)}
+                  size="sm"
+                  className="bg-red-1 text-white"
+                >
+                  <Trash className="w-4 h-4" />
+                </Button>
+              </div>
+              <Image
+                src={url}
+                alt="collection"
+                width={200}
+                height={200}
+                className="object-cover rounded-lg"
+              />
             </div>
-            <Image
-              src={url}
-              alt="collection"
-              width={200}
-              height={200}
-              className="object-cover rounded-lg"
-            />
-          </div>
-        ))}
+          ))}
       </div>
       <CldUploadWidget
         uploadPreset="rimdasilva"
@@ -65,7 +66,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         }}
       >
         {({ open }) => (
-          <Button onClick={() => open()} className="bg-grey-1 text-white">
+          <Button
+            onClick={() => open()}
+            className="bg-grey-1 hover:bg-gray-400 text-white"
+            type="button"
+          >
             <Plus className="h-4 w-4 mr-2" />
             Upload an Image
           </Button>
